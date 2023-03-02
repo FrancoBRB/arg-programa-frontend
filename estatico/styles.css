@@ -1,0 +1,113 @@
+/* NAVBAR CSS SECTION */
+
+nav {
+  max-height: 15vh;
+}
+
+.ap__logo{
+  max-height: 75px;
+}
+
+.navbar__elements {
+  font-family: var(--items-font);
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: var(--padding-md);
+  padding: var(--padding-md);
+  list-style-type: none;
+}
+
+.navbar__logos {
+  margin-right: auto;
+  display: flex;
+  gap: var(--padding-md);
+}
+
+li {
+  text-decoration: none;
+}
+
+/* HEADER CSS SECTION */
+
+header{
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+}
+
+.header__hero {
+  flex-direction: column-reverse;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--padding-xl);
+}
+
+.header__image {
+  border-radius: 50%;
+  box-shadow: rgba(13, 202, 240, 0.4) 5px 5px, rgba(13, 202, 240, 0.3) 10px 10px,
+    rgba(13, 202, 240, 0.2) 15px 15px, rgba(13, 202, 240, 0.1) 20px 20px,
+    rgba(13, 202, 240, 0.05) 25px 25px;
+}
+
+.header__title {
+  font-family: var(--items-font);
+  font-weight: 800;
+}
+
+.btn-contact {
+  font-family: var(--items-font);
+}
+
+/* MAIN SECTION */
+
+/* ABOUT AND SKILLS */
+
+main{
+  font-family: var(--text-font);
+}
+
+.highlight__text{
+  color: var(--color-primary);
+}
+
+.custom-badge{
+  font-size: .9em;
+  margin: 5px 5px;
+  display: inline-flex;
+  padding: 6px;
+  border-radius: 12px;
+  border: solid 1px rgba(125, 125, 125, .5);
+}
+
+/* EDUCATION */
+
+.table__image{
+  max-height: 65px;
+}
+
+i{
+  font-size: 1em;
+}
+
+/* RESPONSIVE SECTION */
+
+@media (min-width: 767px) {
+  .header__hero {
+    flex-direction: row;
+    gap: 20vw;
+  }
+}
+
+/* VARIABLES SECTION */
+
+:root {
+  --padding-sm: 10px;
+  --padding-md: 15px;
+  --padding-bg: 20px;
+  --padding-xl: 40px;
+  --items-font: "Nunito Sans", sans-serif;
+  --text-font: "Space Grotesk", sans-serif;
+  --color-primary: rgba(13, 202, 240);
+}
