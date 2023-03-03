@@ -1,0 +1,11 @@
+h2{
+    font-family: var(--font-text);
+}
+
+table{
+    font-family: var(--font-text);
+}
+
+.table__image {
+  max-height: 50px;
+}

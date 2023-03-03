@@ -1,0 +1,11 @@
+h2 {
+  font-family: var(--font-text);
+}
+
+p{
+  font-family: var(--font-text);
+}
+
+.highlight__text {
+  color: var(--color-primary);
+}

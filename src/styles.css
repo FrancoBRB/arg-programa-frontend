@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --padding-sm: 10px;
+  --padding-md: 15px;
+  --padding-bg: 20px;
+  --padding-xl: 40px;
+  --font-items: "Nunito Sans", sans-serif;
+  --font-text: "Space Grotesk", sans-serif;
+  --color-primary: rgba(13, 202, 240);
+}
+
+
+.controls{
+  display: flex;
+  align-items: center;
+}
+
+.controls-icon{
+  margin-left: auto;
+  font-size: 1.3em;
+}

@@ -1,0 +1,15 @@
+nav{
+    font-family: var(--font-items);
+}
+
+button{
+    max-width: 66px;
+}
+
+li:hover{
+    text-decoration: underline;
+}
+
+li:active{
+    text-decoration: underline;
+}
