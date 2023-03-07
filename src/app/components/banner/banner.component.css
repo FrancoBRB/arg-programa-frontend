@@ -13,6 +13,11 @@ header{
   /*transform: translateY(-20%);*/
 }
 
+a{
+  text-decoration: none;
+  color: #000;
+}
+
 .header__image {
   border-radius: 50%;
   box-shadow: rgba(13, 202, 240, 0.4) 5px 5px, rgba(13, 202, 240, 0.3) 10px 10px,

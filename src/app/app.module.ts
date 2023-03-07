@@ -15,6 +15,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProyectCardComponent } from './components/proyect-card/proyect-card.component';
 import { ProyectsComponent } from './components/proyects/proyects.component';
 import { SoftComponent } from './components/soft/soft.component';
+import { AboutService } from './services/about.service';
+import { EducationService } from './services/education.service';
+
+// ./SERVICES
+import { HardSkillsService } from './services/hard-skills.service';
+import { LanguagesService } from './services/languages.service';
+import { ProyectsService } from './services/proyects.service';
+import { SoftSkillsService } from './services/soft-skills.service';
 
 @NgModule({
   declarations: [
@@ -28,10 +36,17 @@ import { SoftComponent } from './components/soft/soft.component';
     HardComponent,
     LanguagesComponent,
     ProyectsComponent,
-    ProyectCardComponent
+    ProyectCardComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  providers: [
+    HardSkillsService,
+    AboutService,
+    EducationService,
+    SoftSkillsService,
+    LanguagesService,
+    ProyectsService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

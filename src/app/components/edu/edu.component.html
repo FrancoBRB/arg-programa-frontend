@@ -6,29 +6,15 @@
   <div class="table-responsive">
     <table class="table">
       <tbody>
-        <tr>
+        <tr *ngFor="let edu of educations">
           <th scope="row">
-            <img class="table__image" src="assets/img/fich.png" alt="Fich">
+            <img class="table__image" src="{{ edu.img }}" alt="Fich" />
           </th>
-          <td><b>UNL Fich</b></td>
-          <td>Ingeniería Informática</td>
-          <td>Marzo 2020 - Actualidad</td>
-        </tr>
-        <tr>
-          <th scope="row">
-            <img class="table__image" src="assets/img/one.png" alt="Fich">
-          </th>
-          <td><b>Oracle Next Education</b></td>
-          <td>Desarrollador</td>
-          <td>Julio 2022 - Enero 2023</td>
-        </tr>
-        <tr>
-          <th scope="row">
-            <img class="table__image" src="assets/img/ap.png" alt="Fich">
-          </th>
-          <td><b>Argentina Programa</b></td>
-          <td>Desarrollador Fullstack</td>
-          <td>Junio 2022 - Actualidad</td>
+          <td>
+            <b>{{ edu.institucion }}</b>
+          </td>
+          <td>{{ edu.carrera }}</td>
+          <td>{{ edu.fecha_inicial }} - {{ edu.fecha_final }}</td>
         </tr>
       </tbody>
     </table>

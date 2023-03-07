@@ -1,0 +1,23 @@
+p {
+  font-family: var(--font-text);
+}
+
+h5 {
+  font-family: var(--font-text);
+}
+
+a {
+  font-family: var(--font-items);
+  color: #323232;
+}
+
+.card{
+    width: 18rem;
+    height: 100%;
+}
+
+@media (max-width: 767px) {
+  .card {
+    margin: 0 auto;
+  }
+}
