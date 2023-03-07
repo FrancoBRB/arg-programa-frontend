@@ -9,9 +9,13 @@
     gap: 5px;
 }
 
-.signature{
-    font-family: 'Indie Flower', cursive;
-    font-size: 2em;
+a{
+    text-decoration: none;
+    color: gray;
+}
+
+a:hover{
+    text-decoration: underline;
 }
 
 ul{
