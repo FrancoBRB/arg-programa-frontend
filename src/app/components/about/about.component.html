@@ -1,7 +1,8 @@
-<div class="controls">
-  <h2>Sobre mí</h2>
-  <i class="fa-solid fa-pencil controls-icon"></i>
-</div>
-<p class="text-muted">
-  {{ about }}
-</p>
+<section id="about">
+  <div class="controls">
+    <h2>Sobre mí</h2>
+    <app-edit-about class="controls-icon" (editProfileEvent)="editProfile($event)"></app-edit-about>
+  </div>
+  <div [innerHTML]="about" class="text-muted about-text"></div>
+  
+</section>

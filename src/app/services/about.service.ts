@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Profile } from '../models/Profile';
 
 @Injectable()
 export class AboutService {
-  aboutText =
-    'Soy un apasionado por la tecnología con una fuerte motivación por aprender y desarrollar mis habilidades en el mundo IT. Empece a programar en 2019 de forma autodidacta y poco a poco fui incursionando en el desarrollo web. Desde 2020 soy estudiante de Ingeniería Informática. En 2022 decidí formalizar mis conocimientos mediante los cursos Oracle Next Education y Argentina Programa. Mis valores se basan en el compromiso, el orden y la eficiencia. ';
+  urlAPI = environment.API_BASE_URL;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getAbout(): Observable<String>{
-    return of(this.aboutText);
+  getProfileByEmail(email: string): Observable<Profile> {
+    return this.http.get<Profile>(`${this.urlAPI}profiles/email/${email}`);
+  }
+
+  editProfile(profile : Profile):Observable<Profile>{
+    return this.http.put<Profile>(`${this.urlAPI}profiles/${profile.id}`,profile);
   }
 }

@@ -1,22 +1,105 @@
-<div class="container mt-3">
-  <div class="controls">
-    <h2>Educación</h2>
-    <i class="fa-solid fa-pencil controls-icon"></i>
+<section id="edu">
+  <div class="container mt-3">
+    <div class="controls">
+      <h2>Educación</h2>
+      <div class="icons">
+        <app-child-edu
+          class="controls-icon"
+          (newEduEvent)="addEducation($event)"
+        ></app-child-edu>
+        <i class="fa-solid fa-pencil controls-icon" (click)="changeMode()"></i>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let edu of educations">
+            <th scope="row">
+              <img
+                *ngIf="!switch"
+                class="table__image"
+                src="{{ edu.img }}"
+                alt="Fich"
+              />
+              <input
+                value="{{ edu.img }}"
+                *ngIf="switch"
+                class="form-control"
+                type="text"
+                placeholder="Url imagen"
+                aria-label="Url imagen"
+                style="width: 180px"
+                id="img-{{ edu.id }}"
+              />
+            </th>
+            <td>
+              <b *ngIf="!switch">{{ edu.establishment }}</b>
+              <input
+                value="{{ edu.establishment }}"
+                *ngIf="switch"
+                class="form-control"
+                type="text"
+                placeholder="Institución"
+                aria-label="Institución"
+                style="width: 180px"
+                id="establishment-{{ edu.id }}"
+              />
+            </td>
+            <td>
+              <span *ngIf="!switch">{{ edu.career }}</span>
+              <input
+                value="{{ edu.career }}"
+                *ngIf="switch"
+                class="form-control"
+                type="text"
+                placeholder="Carrera"
+                aria-label="Carrera"
+                style="width: 180px"
+                id="career-{{ edu.id }}"
+              />
+            </td>
+            <td>
+              <span *ngIf="!switch"
+                >{{ formatedDate(edu.dateIni) }} -
+                {{ formatedDate(edu.dateFin) }}</span
+              >
+              <div class="dates" *ngIf="switch">
+                <input
+                  value="{{ edu.dateIni }}"
+                  class="form-control"
+                  type="text"
+                  placeholder="F/ Ini"
+                  aria-label="F/ Ini"
+                  style="width: 95px"
+                  id="dini-{{ edu.id }}"
+                />
+                -
+                <input
+                  value="{{ edu.dateFin }}"
+                  class="form-control"
+                  type="text"
+                  placeholder="F/ Fin"
+                  aria-label="F/ Fin"
+                  style="width: 95px"
+                  id="dfin-{{ edu.id }}"
+                />
+              </div>
+            </td>
+            <td *ngIf="switch" class="optional">
+              <i
+                class="fa-regular fa-circle-check"
+                (click)="updateEducation(edu.id)"
+              ></i
+              >{{ " "
+              }}<i
+                class="fa-regular fa-circle-xmark"
+                (click)="deleteEducation(edu.id)"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div class="table-responsive">
-    <table class="table">
-      <tbody>
-        <tr *ngFor="let edu of educations">
-          <th scope="row">
-            <img class="table__image" src="{{ edu.img }}" alt="Fich" />
-          </th>
-          <td>
-            <b>{{ edu.institucion }}</b>
-          </td>
-          <td>{{ edu.carrera }}</td>
-          <td>{{ edu.fecha_inicial }} - {{ edu.fecha_final }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+  
+</section>

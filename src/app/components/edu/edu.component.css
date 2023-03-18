@@ -6,6 +6,26 @@ table{
     font-family: var(--font-text);
 }
 
+.optional{
+  font-size: 1.5em;
+}
+
 .table__image {
   max-height: 50px;
+}
+
+.icons{
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.dates{
+  display: flex;
+  gap: 10px;
+}
+
+.fa-regular:hover{
+  cursor: pointer;
 }

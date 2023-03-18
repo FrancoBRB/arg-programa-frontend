@@ -1,45 +1,31 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Softskill } from '../models/Softskill';
 
 @Injectable()
 export class SoftSkillsService {
-  softskills = [
-    {
-      id: 1,
-      caracteristica: 'Pensamiento crítico',
-      porcentaje: 85,
-    },
-    {
-      id: 2,
-      caracteristica: 'Trabajo en equipo',
-      porcentaje: 60,
-    },
-    {
-      id: 3,
-      caracteristica: 'Resiliencia',
-      porcentaje: 95,
-    },
-    {
-      id: 4,
-      caracteristica: 'Desarrollo constante',
-      porcentaje: 100,
-    },
-    {
-      id: 5,
-      caracteristica: 'Creatividad',
-      porcentaje: 40,
-    },
-  ];
+  urlAPI = environment.API_BASE_URL;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getSoftSkills(): Observable<softSkill[]> {
-    return of(this.softskills);
+  getSoftSkills(): Observable<Softskill[]> {
+    return this.http.get<Softskill[]>(`${this.urlAPI}softskills/list/1`);
   }
-}
 
-export interface softSkill {
-  id: Number;
-  caracteristica: String;
-  porcentaje: Number;
+  editSoftSkill(softSkill: Softskill): Observable<Softskill> {
+    return this.http.put<Softskill>(`${this.urlAPI}softskills/${softSkill.id}`, {
+      skillname: softSkill.skillname,
+      porcentage: softSkill.porcentage,
+    });
+  }
+
+  deleteSoftSkill(id: number): Observable<Object> {
+    return this.http.delete(`${this.urlAPI}softskills/${id}`);
+  }
+
+  addSoftskill(softSkill: Softskill): Observable<Softskill> {
+    return this.http.post<Softskill>(`${this.urlAPI}softskills/1`, softSkill);
+  }
 }

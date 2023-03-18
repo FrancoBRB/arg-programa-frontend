@@ -1,0 +1,11 @@
+form{
+    font-size: 16px;
+}
+
+div{
+    font-family: var(--font-text);
+}
+
+button{
+    font-family: var(--font-items);
+}

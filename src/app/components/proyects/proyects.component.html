@@ -1,21 +1,98 @@
-<div class="container my-5">
+<div class="container mt-2 mb-4" id="projects">
   <!-- EMPIEZA PROYECTOS -->
   <div class="controls">
     <h2>Proyectos</h2>
-    <i class="fa-solid fa-pencil controls-icon"></i>
+    <i class="fa-solid fa-plus controls-icon" data-bs-toggle="modal" data-bs-target="#newProjectModal"></i>
   </div>
 
   <div class="row">
     <!-- Iterar proyect card component por cada proyecto -->
     <div class="col-12 col-md-6 col-lg-4 my-3" *ngFor="let project of projects">
       <app-proyect-card
-        [name]="project.nombre"
-        [desc]="project.descripcion"
+        [name]="project.name"
+        [desc]="project.desc"
         [img]="project.img"
-        [repo]="project.repositorio"
+        [repo]="project.repo"
+        [id]="project.id"
+        (updateProjectEvent)="updateProject($event)"
+        (deleteProjectEvent)="deleteProject($event)"
       ></app-proyect-card>
     </div>
   </div>
 
   <!-- TERMINA PROYECTOS -->
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="newProjectModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="newProjectModalLabel">Agregar nuevo proyecto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label"
+              >Imagen:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput"
+              placeholder="assets/img/encriptador.png"
+              name="imgToAdd"
+              [(ngModel)]="newImg"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label"
+              >Nombre:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput2"
+              placeholder="Encripador ONE"
+              name="nameToAdd"
+              [(ngModel)]="newName"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label"
+              >Descripción:</label
+            >
+            <div class="input-group">
+              <textarea
+                [(ngModel)]="newDesc"
+                name="descToAdd"
+                class="form-control"
+                aria-label="With textarea"
+                style="height: 150px;"
+              ></textarea>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label"
+              >Link repositorio:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput2"
+              placeholder="https://github.com/FrancoBRB/encriptador-one"
+              name="repoToAdd"
+              [(ngModel)]="newRepo"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="addProject()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+

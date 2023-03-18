@@ -3,6 +3,10 @@ html {
   scroll-behavior: smooth;
 }
 
+.highlight{
+  color: #0dcaf0;
+}
+
 :root {
   --padding-sm: 10px;
   --padding-md: 15px;

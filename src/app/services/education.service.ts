@@ -1,47 +1,28 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Education } from '../models/Education';
 
 @Injectable()
 export class EducationService {
-  education = [
-    {
-      id: 1,
-      institucion: 'UNL Fich',
-      carrera: 'Ingeniería Informática',
-      fecha_inicial: 'Marzo 2020',
-      fecha_final: 'Actualidad',
-      img: 'assets/img/fich.png',
-    },
-    {
-      id: 2,
-      institucion: 'Oracle Next Education',
-      carrera: 'Desarrollador',
-      fecha_inicial: 'Julio 2022',
-      fecha_final: 'Enero 2023',
-      img: 'assets/img/one.png',
-    },
-    {
-      id: 3,
-      institucion: 'Argentina Programa',
-      carrera: 'Desarrollador Fullstack',
-      fecha_inicial: 'Junio 2022',
-      fecha_final: 'Mayo 2023',
-      img: 'assets/img/ap.png',
-    },
-  ];
+  apiURL = environment.API_BASE_URL;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getEducation(): Observable<edu[]> {
-    return of(this.education);
+  getEducation(): Observable<Education[]> {
+    return this.http.get<Education[]>(`${this.apiURL}edu/list/1`);
   }
-}
 
-export interface edu {
-  id: number;
-  institucion: String;
-  carrera: String;
-  fecha_inicial: String;
-  fecha_final: String;
-  img: String;
+  updateEducation(edu: Education): Observable<Object> {
+    return this.http.put(`${this.apiURL}edu/${edu.id}`, edu);
+  }
+
+  addEducation(edu: Education): Observable<Education> {
+    return this.http.post<Education>(`${this.apiURL}edu/1`, edu);
+  }
+
+  deleteEducation(id:number): Observable<Object>{
+    return this.http.delete(`${this.apiURL}edu/${id}`)
+  }
 }

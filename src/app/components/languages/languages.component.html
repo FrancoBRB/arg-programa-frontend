@@ -1,20 +1,25 @@
 <div class="controls">
   <h2>Idiomas</h2>
-  <i class="fa-solid fa-pencil controls-icon"></i>
+  <app-edit-lang
+    class="controls-icon"
+    (newLangEvent)="addLanguage($event)"
+    (deleteLangEvent)="deleteLanguage($event)"
+    (updateLangEvent)="updateLanguage($event)"
+  ></app-edit-lang>
 </div>
 <div class="mt-2" *ngFor="let lang of languages">
-  {{ lang.nombre }}:
+  {{ lang.langName }}:
   <div
     class="progress"
     role="progressbar"
     aria-label="Info striped example"
-    [attr.aria-valuenow]="lang.porcentaje.toString()"
+    [attr.aria-valuenow]="lang.porcentage.toString()"
     aria-valuemin="0"
     aria-valuemax="100"
   >
     <div
       class="progress-bar progress-bar-striped bg-info"
-      attr.style="width: {{ lang.porcentaje }}%"
+      attr.style="width: {{ lang.porcentage }}%"
     ></div>
   </div>
 </div>

@@ -5,6 +5,106 @@
     <p class="card-text">
       {{ desc }}
     </p>
-    <a href="{{ repo }}" class="btn btn-outline-info align-self-start mt-auto">Repositorio</a>
+    <div class="align-self-start mt-auto">
+      <a href="{{ repo }}" class="btn btn-outline-info">Repositorio</a>
+
+      <i
+        class="fa-solid fa-pencil"
+        data-bs-toggle="modal"
+        attr.data-bs-target="#cardModal-{{ id }}"
+      ></i>
+      <i class="fa-solid fa-xmark" (click)="deleteProject()"></i>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="cardModal-{{ id }}"
+  tabindex="-1"
+  attr.aria-labelledby="cardModal-{{ id }}Label"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="cardModal-{{ id }}Label">
+          {{ name }}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- EMPIEZA FORM -->
+        <form>
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label"
+              >Imagen:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput"
+              name="imgToAdd"
+              [(ngModel)]="newImg"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label"
+              >Nombre:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput2"
+              name="nameToAdd"
+              [(ngModel)]="newName"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label"
+              >Descripción:</label
+            >
+            <div class="input-group">
+              <textarea
+                [(ngModel)]="newDesc"
+                name="descToAdd"
+                class="form-control"
+                aria-label="With textarea"
+                style="height: 150px;"
+              ></textarea>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label"
+              >Link repositorio:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput2"
+              name="repoToAdd"
+              [(ngModel)]="newRepo"
+            />
+          </div>
+        </form>
+      </div>
+      <!-- TERMINA FORM -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          data-bs-dismiss="modal"
+        >
+          Canceltar
+        </button>
+        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="updateProject()">Aceptar</button>
+      </div>
+    </div>
   </div>
 </div>

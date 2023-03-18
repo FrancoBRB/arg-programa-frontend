@@ -1,0 +1,12 @@
+.accordion {
+  font-size: 14px;
+}
+.icons-control{
+  font-size: 1.3em;
+}
+button {
+  font-family: var(--font-items);
+}
+h1 {
+  font-family: var(--font-text);
+}

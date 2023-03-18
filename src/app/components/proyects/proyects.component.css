@@ -1,3 +1,19 @@
 h2 {
     font-family: var(--font-text);
 }
+
+.modal{
+    font-family: var(--font-text);
+}
+
+button{
+    font-family: var(--font-items);
+}
+
+.fa-plus{
+    font-size: 1.7em;
+}
+
+.fa-plus:hover{
+    font-size: 1.8em;
+}

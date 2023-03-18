@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { softSkill, SoftSkillsService } from 'src/app/services/soft-skills.service';
+import { Softskill } from 'src/app/models/Softskill';
+import { SoftSkillsService } from 'src/app/services/soft-skills.service';
 
 @Component({
   selector: 'app-soft',
@@ -8,12 +9,24 @@ import { softSkill, SoftSkillsService } from 'src/app/services/soft-skills.servi
 })
 export class SoftComponent implements OnInit {
 
-  softskills: softSkill[] = [];
+  softskills: Softskill[] = [];
 
   constructor(private softService: SoftSkillsService) { }
 
-  typede(r: any){
-    return typeof(r);
+  addSoftSkill(soft: Softskill){
+    this.softskills.push(soft);
+  }
+
+  deleteSoftSkill(id:number){
+    this.softskills = this.softskills.filter((skill) => skill.id != id);
+  }
+
+  updateSoftSkill(soft: Softskill){
+    const softToUpdate = this.softskills.find(e => e.id === soft.id);
+    if(softToUpdate){
+      softToUpdate.porcentage = soft.porcentage;
+      softToUpdate.skillname = soft.skillname;
+    }
   }
 
   ngOnInit() {

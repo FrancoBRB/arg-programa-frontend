@@ -1,43 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Hardskill } from '../models/Hardskill';
 
 @Injectable()
 export class HardSkillsService {
-  skills = [
-    {
-      id: 1,
-      skill: 'HTML/CSS',
-    },
-    {
-      id: 2,
-      skill: 'JAVASCRIPT',
-    },
-    {
-      id: 3,
-      skill: 'TYPESCRIPT',
-    },
-    {
-      id: 4,
-      skill: 'ANGULAR',
-    },
-    {
-      id: 5,
-      skill: 'SVELTE',
-    },
-    {
-      id: 6,
-      skill: 'NODEJS',
-    },
-  ];
+  urlAPI = environment.API_BASE_URL;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getSkills(): Observable<hardSkill[]> {
-    return of(this.skills);
+  getHardSkills(): Observable<Hardskill[]> {
+    return this.http.get<Hardskill[]>(`${this.urlAPI}hardskills/list/1`);
   }
-}
 
-export interface hardSkill {
-  id: number;
-  skill: string;
+  editHardSkill(hardskill: Hardskill): Observable<Hardskill> {
+    return this.http.put<Hardskill>(
+      `${this.urlAPI}hardskills/${hardskill.id}`,
+      {
+        skillname: hardskill.skillname,
+      }
+    );
+  }
+
+  deleteHardSkill(id: number): Observable<Object> {
+    return this.http.delete(`${this.urlAPI}hardskills/${id}`);
+  }
+
+  addHardSkill(hardskill: Hardskill): Observable<Hardskill> {
+    return this.http.post<Hardskill>(`${this.urlAPI}hardskills/1`, hardskill);
+  }
 }

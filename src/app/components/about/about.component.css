@@ -2,10 +2,6 @@ h2 {
   font-family: var(--font-text);
 }
 
-p{
+.about-text {
   font-family: var(--font-text);
-}
-
-.highlight__text {
-  color: var(--color-primary);
 }

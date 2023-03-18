@@ -1,0 +1,33 @@
+<form>
+  <span>Id: {{ skill.id }}</span
+  ><br />
+  <span
+    >Nombre: <b>{{ skill.skillname }}</b></span
+  >
+  <div class="mb-3">
+    <label for="skillname-input" class="form-label">Nuevo nombre:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="skillname-input"
+      name="skillname-input"
+      [(ngModel)]="newName"
+    />
+    <label for="customRange2" class="form-label">Porcentaje:</label>
+    <input
+      type="range"
+      class="form-range"
+      min="0"
+      max="100"
+      id="customRange2"
+      name="newSoftPorcentage"
+      [(ngModel)]="newSoftPorcentage"
+    />
+  </div>
+  <button class="btn btn-danger btn-sm" (click)="deleteSoftSkill()">
+    Eliminar
+  </button>
+  <button class="btn btn-success btn-sm mx-3" (click)="editSoftSkill()">
+    Guardar cambios
+  </button>
+</form>

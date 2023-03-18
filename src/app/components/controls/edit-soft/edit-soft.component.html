@@ -1,0 +1,103 @@
+<i
+  class="fa-solid fa-pencil"
+  data-bs-toggle="modal"
+  data-bs-target="#softModal"
+></i>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="softModal"
+  tabindex="-1"
+  aria-labelledby="softModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="softModalLabel">Editar softskills</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <label for="customRange2" class="form-label">Porcentaje:</label>
+        <input
+          type="range"
+          class="form-range"
+          min="0"
+          max="100"
+          id="customRange2"
+          [(ngModel)]="newSoftSkillPorcentage"
+        />
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nueva softskill"
+            aria-label="Nueva softskill"
+            aria-describedby="button-addon2"
+            [(ngModel)]="newSoftSkill"
+          />
+          <button
+            class="btn btn-outline-success"
+            type="button"
+            id="button-addon2"
+            (click)="addSoftSkill()"
+          >
+            Añadir
+          </button>
+        </div>
+
+        <!-- EMPIEZA TABLA -->
+        <div class="accordion" id="accordionHards">
+          <div class="accordion-item" *ngFor="let skills of softskills">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapse' + skills.id"
+                aria-expanded="false"
+                [attr.aria-controls]="'collapse' + skills.id"
+              >
+                {{ skills.skillname }}
+              </button>
+            </h2>
+            <div
+              [id]="'collapse' + skills.id"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingThree"
+              data-bs-parent="#accordionHards"
+            >
+              <div class="accordion-body">
+                <app-child-softskill
+                  [skill]="skills"
+                  (deleteEvent)="deleteSoftSkill($event)"
+                  (updateEvent)="updateSoftSkill($event)"
+                ></app-child-softskill>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TERMINA TABLA -->
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+        <button type="submit" data-bs-dismiss="modal" class="btn btn-outline-success">
+          Aceptar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

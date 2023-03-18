@@ -1,0 +1,106 @@
+<i
+  class="fa-solid fa-plus controls-icon"
+  data-bs-toggle="modal"
+  data-bs-target="#eduModal"
+></i>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="eduModal"
+  tabindex="-1"
+  aria-labelledby="eduModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="eduModalLabel">Agregar educación</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label"
+              >Imagen:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput"
+              placeholder="assets/img/fich.png"
+              [(ngModel)] = "imgToAdd"
+              name="imgToAdd"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label"
+              >Lugar:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput2"
+              placeholder="UNL Fich"
+              [(ngModel)] = "establishmentToAdd"
+              name="establishmentToAdd"
+            /> 
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label"
+              >Carrera:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput"
+              placeholder="Ing. Informática"
+              [(ngModel)]="careerToAdd"
+              name="careerToAdd"
+            />
+          </div>
+          <div class="row">
+            <label class="form-label"
+              >Fecha de inicío y finalización respectivamente:</label
+            >
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="YYYY-MM-DD"
+                aria-label="YYYY-MM-DD"
+                [(ngModel)]="dateIniToAdd"
+                name="dateIniToAdd"
+              />
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="YYYY-MM-DD"
+                aria-label="YYYY-MM-DD"
+                [(ngModel)]="dateFinToAdd"
+                name="dateFinToAdd"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+        <button type="submit" data-bs-dismiss="modal" class="btn btn-outline-success" (click)="addEducation()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

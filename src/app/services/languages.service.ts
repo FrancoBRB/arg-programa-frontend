@@ -1,32 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Language } from '../models/Language';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LanguagesService {
-  languages = [
-    {
-      id: 1,
-      nombre: 'Inglés',
-      porcentaje: 80,
-    },
-    {
-      id: 2,
-      nombre: 'Español',
-      porcentaje: 100,
-    },
-  ];
+  urlAPI = environment.API_BASE_URL;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getLanguages(): Observable<Language[]> {
-    return of(this.languages);
+    return this.http.get<Language[]>(`${this.urlAPI}languages/list/1`);
   }
-}
 
-export interface Language {
-  id: Number;
-  nombre: String;
-  porcentaje: Number;
+  editLanguage(language: Language): Observable<Language> {
+    return this.http.put<Language>(`${this.urlAPI}languages/${language.id}`, {
+      langName: language.langName,
+      porcentage: language.porcentage,
+    });
+  }
+
+  deleteLanguage(id: number): Observable<Object> {
+    return this.http.delete(`${this.urlAPI}languages/${id}`);
+  }
+
+  addLanguage(language: Language): Observable<Language> {
+    return this.http.post<Language>(`${this.urlAPI}languages/1`, language);
+  }
 }

@@ -1,8 +1,13 @@
 <div class="controls">
   <h2>Hard Skills</h2>
-  <i class="fa-solid fa-pencil controls-icon"></i>
+  <app-edit-hard
+    class="controls-icon"
+    (newHardSkillEvent)="addHardSkill($event)"
+    (deleteHardSkillEvent)="deleteHardSkill($event)"
+    (updateHardSkillEvent)="updateHardSkill($event)"
+  ></app-edit-hard>
 </div>
 
 <div *ngFor="let skill of hardskills" class="custom-badge">
-  <span>· {{ skill.skill }}</span>
+  <span>· {{ skill.skillname }}</span>
 </div>

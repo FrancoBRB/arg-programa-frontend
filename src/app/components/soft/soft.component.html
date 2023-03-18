@@ -1,21 +1,26 @@
-<div class="mb-5">
+<div class="mb-5" id="soft">
   <div class="controls">
     <h2>Soft Skills</h2>
-    <i class="fa-solid fa-pencil controls-icon"></i>
+    <app-edit-soft
+      class="controls-icon"
+      (addSoftSkillEvent)="addSoftSkill($event)"
+      (deleteSoftSkillEvent)="deleteSoftSkill($event)"
+      (updateSoftSkillEvent)="updateSoftSkill($event)"
+    ></app-edit-soft>
   </div>
   <div class="mt-2" *ngFor="let softskill of softskills">
-    {{ softskill.caracteristica }}
+    {{ softskill.skillname }}:
     <div
       class="progress"
       role="progressbar"
       aria-label="Info striped example"
-      [attr.aria-valuenow]="softskill.porcentaje.toString()"
+      [attr.aria-valuenow]="softskill.porcentage?.toString()"
       aria-valuemin="0"
       aria-valuemax="100"
     >
       <div
         class="progress-bar progress-bar-striped bg-info"
-        attr.style="width: {{ softskill.porcentaje }}%"
+        attr.style="width: {{ softskill.porcentage }}%"
       ></div>
     </div>
   </div>
