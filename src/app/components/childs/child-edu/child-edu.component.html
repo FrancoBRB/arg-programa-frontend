@@ -5,26 +5,26 @@
 ></i>
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="eduModal"
-  tabindex="-1"
-  aria-labelledby="eduModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="eduModalLabel">Agregar educación</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form>
+<form #eduForm="ngForm" (ngSubmit)="onSubmit(eduForm)">
+  <div
+    class="modal fade"
+    id="eduModal"
+    tabindex="-1"
+    aria-labelledby="eduModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="eduModalLabel">Agregar educación</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label"
               >Imagen:</label
@@ -34,9 +34,13 @@
               class="form-control"
               id="formGroupExampleInput"
               placeholder="assets/img/fich.png"
-              [(ngModel)] = "imgToAdd"
+              [(ngModel)]="imgToAdd"
               name="imgToAdd"
             />
+            <div class="alert alert-danger mt-3" role="alert" *ngIf="imgAlert">
+              La imagen no puede ser un campo vacío.
+            </div>
+            
           </div>
           <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label"
@@ -47,9 +51,12 @@
               class="form-control"
               id="formGroupExampleInput2"
               placeholder="UNL Fich"
-              [(ngModel)] = "establishmentToAdd"
+              [(ngModel)]="establishmentToAdd"
               name="establishmentToAdd"
-            /> 
+            />
+            <div class="alert alert-danger mt-3" role="alert" *ngIf="establishmentAlert">
+              El lugar no puede ser un campo vacío.
+            </div>
           </div>
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label"
@@ -63,6 +70,9 @@
               [(ngModel)]="careerToAdd"
               name="careerToAdd"
             />
+            <div class="alert alert-danger mt-3" role="alert" *ngIf="careerAlert">
+              La carrera no puede ser un campo vacío.
+            </div>
           </div>
           <div class="row">
             <label class="form-label"
@@ -89,18 +99,24 @@
               />
             </div>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-outline-danger"
-          data-bs-dismiss="modal"
-        >
-          Cancelar
-        </button>
-        <button type="submit" data-bs-dismiss="modal" class="btn btn-outline-success" (click)="addEducation()">Aceptar</button>
+          <div class="alert alert-danger mt-3" role="alert" *ngIf="dateAlert">
+            Por favor ingrese las fechas en formato YYYY-MM-DD.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+            #closeButton
+          >
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-outline-success" type="submit">
+            Aceptar
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>

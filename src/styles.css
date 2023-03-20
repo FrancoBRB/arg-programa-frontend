@@ -7,6 +7,10 @@ html {
   color: #0dcaf0;
 }
 
+.alert{
+  font-size: 14px !important;
+}
+
 :root {
   --padding-sm: 10px;
   --padding-md: 15px;

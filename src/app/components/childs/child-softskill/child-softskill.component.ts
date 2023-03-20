@@ -11,6 +11,7 @@ export class ChildSoftskillComponent implements OnInit {
   @Input() skill: Softskill = new Softskill();
   newName: string = '';
   newSoftPorcentage: number = 0;
+  alert: boolean = false;
   @Output() deleteEvent = new EventEmitter<number>();
   @Output() updateEvent = new EventEmitter<Softskill>();
 
@@ -18,12 +19,19 @@ export class ChildSoftskillComponent implements OnInit {
 
   ngOnInit() {}
 
-  editSoftSkill() {
-    this.skill.skillname = this.newName;
-    this.skill.porcentage = this.newSoftPorcentage;
+  onSubmit(form: any) {
+    if(!form.value.newSoftName){
+      this.alert = true;
+      return;
+    }
+    this.alert = false;
+    this.skill.skillname = form.value.newSoftName;
+    this.skill.porcentage = form.value.newSoftPorcentage;
     this.softSkillService
       .editSoftSkill(this.skill)
       .subscribe((e) => this.updateEvent.emit(e));
+    this.newName = "";
+    this.newSoftPorcentage = 0;
   }
 
   deleteSoftSkill() {

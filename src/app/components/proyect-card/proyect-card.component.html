@@ -19,29 +19,30 @@
 </div>
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="cardModal-{{ id }}"
-  tabindex="-1"
-  attr.aria-labelledby="cardModal-{{ id }}Label"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="cardModal-{{ id }}Label">
-          {{ name }}
-        </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <!-- EMPIEZA FORM -->
-        <form>
+<form #editProjectForm="ngForm" (ngSubmit)="onSubmit(editProjectForm)"> 
+  <div
+    class="modal fade"
+    id="cardModal-{{ id }}"
+    tabindex="-1"
+    attr.aria-labelledby="cardModal-{{ id }}Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="cardModal-{{ id }}Label">
+            {{ name }}
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <!-- EMPIEZA FORM -->
+
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label"
               >Imagen:</label
@@ -54,6 +55,9 @@
               [(ngModel)]="newImg"
             />
           </div>
+          <div *ngIf="alertImg" class="alert alert-danger mt-2" role="alert">
+            La imagen no puede estar vacía.
+          </div>         
           <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label"
               >Nombre:</label
@@ -66,6 +70,9 @@
               [(ngModel)]="newName"
             />
           </div>
+          <div *ngIf="alertName" class="alert alert-danger mt-2" role="alert">
+            El nombre no puede estar vacío.
+          </div>    
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label"
               >Descripción:</label
@@ -76,10 +83,13 @@
                 name="descToAdd"
                 class="form-control"
                 aria-label="With textarea"
-                style="height: 150px;"
+                style="height: 150px"
               ></textarea>
             </div>
           </div>
+          <div *ngIf="alertDesc" class="alert alert-danger mt-2" role="alert">
+            La descripción no puede estar vacía.
+          </div>    
           <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label"
               >Link repositorio:</label
@@ -92,19 +102,28 @@
               [(ngModel)]="newRepo"
             />
           </div>
-        </form>
-      </div>
-      <!-- TERMINA FORM -->
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-outline-danger"
-          data-bs-dismiss="modal"
-        >
-          Canceltar
-        </button>
-        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="updateProject()">Aceptar</button>
+          <div *ngIf="alertRepo" class="alert alert-danger mt-2" role="alert">
+            El link no puede estar vacío.
+          </div>    
+        </div>
+        <!-- TERMINA FORM -->
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+            #closeButton
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="btn btn-outline-success"
+          >
+            Aceptar
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>

@@ -11,6 +11,7 @@ export class EditSoftComponent implements OnInit {
   softskills: Softskill[] = [];
   newSoftSkill: string = '';
   newSoftSkillPorcentage: number = 0;
+  nameAlert: boolean = false;
   @Output() addSoftSkillEvent = new EventEmitter<Softskill>();
   @Output() deleteSoftSkillEvent = new EventEmitter<number>();
   @Output() updateSoftSkillEvent = new EventEmitter<Softskill>();
@@ -32,15 +33,22 @@ export class EditSoftComponent implements OnInit {
     this.updateSoftSkillEvent.emit(softskill);
   }
 
-  addSoftSkill() {
+  onSubmit(form: any) {
+    if(!form.value.newSoftSkill){
+      this.nameAlert = true;
+      return;
+    }
+    this.nameAlert = false;
+    this.newSoftSkill = '';
+    this.newSoftSkillPorcentage = 0;
     const softSkillToAdd = new Softskill();
-    softSkillToAdd.porcentage = this.newSoftSkillPorcentage;
-    softSkillToAdd.skillname = this.newSoftSkill;
+    softSkillToAdd.porcentage = form.value.newSoftSkillPorcentage;
+    softSkillToAdd.skillname = form.value.newSoftSkill;
     this.softSkillService.addSoftskill(softSkillToAdd).subscribe((sk) => {
       this.addSoftSkillEvent.emit(sk);
       this.softSkillService
         .getSoftSkills()
         .subscribe((e) => (this.softskills = e));
     });
-  }
+  } 
 }

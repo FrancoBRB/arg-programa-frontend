@@ -24,24 +24,26 @@
         ></button>
       </div>
       <div class="modal-body">
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Nueva hardskill"
-            aria-label="Nueva hardskill"
-            aria-describedby="button-addon2"
-            [(ngModel)]="newHardSkill"
-          />
-          <button
-            class="btn btn-outline-success"
-            type="button"
-            id="button-addon2"
-            (click)="addHardSkill()"
-          >
-            Añadir
-          </button>
-        </div>
+        <form #newHardSkillForm="ngForm" (ngSubmit)="onSubmit(newHardSkillForm)">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nueva hardskill"
+              aria-label="Nueva hardskill"
+              aria-describedby="button-addon2"
+              [(ngModel)]="newHardSkill"
+              name="newHardSkill"
+            />
+            <button
+              class="btn btn-outline-success"
+              type="submit"
+              id="button-addon2"
+            >
+              Añadir
+            </button>
+          </div>
+        </form>
 
         <!-- EMPIEZA TABLA -->
         <div class="accordion" id="accordionHards">
@@ -76,6 +78,9 @@
         </div>
 
         <!-- TERMINA TABLA -->
+        <div class="alert alert-danger mt-3" *ngIf="alert" role="alert">
+          La nueva hardskill no puede contener un nombre vacío.
+        </div>        
       </div>
       <div class="modal-footer">
         <button

@@ -14,7 +14,7 @@ export class AboutComponent implements OnInit {
   constructor(private aboutService: AboutService) {}
 
   editProfile(profile: Profile) {
-    this.about = profile.about;
+    this.about = this.highlightText(profile.about);
   }
 
   highlightText(text: string): string {

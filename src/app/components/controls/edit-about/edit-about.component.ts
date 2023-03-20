@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, NgModule, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/Profile';
 import { AboutService } from 'src/app/services/about.service';
@@ -11,9 +11,11 @@ import { AboutService } from 'src/app/services/about.service';
 })
 export class EditAboutComponent implements OnInit {
 
-  about: string = "";
+  public about!: string;
   profile : Profile = new Profile();
   @Output() editProfileEvent = new EventEmitter<Profile>();
+  alert: boolean = false;
+  @ViewChild('closeButton') closeButton: any;
 
   constructor(private aboutService: AboutService, private router: Router) { }
 
@@ -24,11 +26,16 @@ export class EditAboutComponent implements OnInit {
     })
   }
 
-  editAbout(){
-    this.profile.about = this.about;
+  onSubmit(form:any){
+    if(!form.value.newAbout){
+      this.alert = true;
+      return;
+    }
+    this.alert = false;
+    this.profile.about = form.value.newAbout;
     this.aboutService.editProfile(this.profile).subscribe(e => {
       this.editProfileEvent.emit(e);
     });
+    this.closeButton.nativeElement.click();
   }
-
 }

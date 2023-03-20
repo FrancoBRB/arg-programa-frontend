@@ -11,6 +11,7 @@ export class EditHardComponent implements OnInit {
   newHardSkill: string = '';
   hardskills: Hardskill[] = [];
   returnData: Hardskill = new Hardskill();
+  alert: boolean = false;
   @Output() newHardSkillEvent = new EventEmitter<Hardskill>();
   @Output() deleteHardSkillEvent = new EventEmitter<number>();
   @Output() updateHardSkillEvent = new EventEmitter<Hardskill>();
@@ -32,12 +33,18 @@ export class EditHardComponent implements OnInit {
     this.updateHardSkillEvent.emit(hard);
   }
 
-  addHardSkill() {
+  onSubmit(form:any) {
+    if(!form.value.newHardSkill){
+      this.alert = true;
+      return;
+    }
+    this.alert = false;
+    this.newHardSkill = "";
     const hardSkillToAdd = new Hardskill();
-    hardSkillToAdd.skillname = this.newHardSkill;
+    hardSkillToAdd.skillname = form.value.newHardSkill;
     this.hardService.addHardSkill(hardSkillToAdd).subscribe((hs) => {
       this.newHardSkillEvent.emit(hs);
       this.hardService.getHardSkills().subscribe((e) => (this.hardskills = e));
-    });
+    }); 
   }
 }

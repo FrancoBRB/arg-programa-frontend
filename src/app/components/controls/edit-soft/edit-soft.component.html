@@ -24,33 +24,39 @@
         ></button>
       </div>
       <div class="modal-body">
-        <label for="customRange2" class="form-label">Porcentaje:</label>
-        <input
-          type="range"
-          class="form-range"
-          min="0"
-          max="100"
-          id="customRange2"
-          [(ngModel)]="newSoftSkillPorcentage"
-        />
-        <div class="input-group mb-3">
+        <form #softForm="ngForm" (ngSubmit)="onSubmit(softForm)">
+          <label for="customRange2" class="form-label">Porcentaje:</label>
           <input
-            type="text"
-            class="form-control"
-            placeholder="Nueva softskill"
-            aria-label="Nueva softskill"
-            aria-describedby="button-addon2"
-            [(ngModel)]="newSoftSkill"
-          />
-          <button
-            class="btn btn-outline-success"
-            type="button"
-            id="button-addon2"
-            (click)="addSoftSkill()"
-          >
-            Añadir
-          </button>
-        </div>
+            type="range"
+            class="form-range"
+            min="0"
+            max="100"
+            id="customRange2"
+            [(ngModel)]="newSoftSkillPorcentage"
+            name="newSoftSkillPorcentage"
+          />          
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nueva softskill"
+              aria-label="Nueva softskill"
+              aria-describedby="button-addon2"
+              [(ngModel)]="newSoftSkill"
+              name="newSoftSkill"
+            />
+            <button
+              class="btn btn-outline-success"
+              type="submit"
+              id="button-addon2"
+            >
+              Añadir
+            </button>       
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="nameAlert">
+            El nombre no puede estar vacío.
+          </div>
+        </form>
 
         <!-- EMPIEZA TABLA -->
         <div class="accordion" id="accordionHards">

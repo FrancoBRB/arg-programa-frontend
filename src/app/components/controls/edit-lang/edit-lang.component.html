@@ -24,36 +24,41 @@
         ></button>
       </div>
       <div class="modal-body">
-        <label for="customRange2" class="form-label">Porcentaje:</label>
-        <input
-          type="range"
-          class="form-range"
-          min="0"
-          max="100"
-          id="customRange2"
-          [(ngModel)]="newLangPorcentage"
-        />
-
-        <div class="input-group mb-3">
+        <form #newLangForm="ngForm" (ngSubmit)="onSubmit(newLangForm)">
+          <label for="customRange2" class="form-label">Porcentaje:</label>
           <input
-            type="text"
-            class="form-control"
-            placeholder="Nuevo idioma"
-            aria-label="Nuevo idioma"
-            aria-describedby="button-addon2"
-            [(ngModel)]="newLangName"
+            type="range"
+            class="form-range"
+            min="0"
+            max="100"
+            id="customRange2"
+            [(ngModel)]="newLangPorcentage"
+            name="newLangPorcentage"
           />
 
-          <button
-            class="btn btn-outline-success"
-            type="button"
-            id="button-addon2"
-            (click)="addLanguage()"
-          >
-            Añadir
-          </button>
-        </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nuevo idioma"
+              aria-label="Nuevo idioma"
+              aria-describedby="button-addon2"
+              [(ngModel)]="newLangName"
+              name="newLangName"
+            />
 
+            <button
+              class="btn btn-outline-success"
+              type="submit"
+              id="button-addon2"
+            >
+              Añadir
+            </button>
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="alert">
+            El idioma no puede estar vacío.
+          </div>
+        </form>
         <!-- EMPIEZA TABLA -->
         <div class="accordion" id="accordionHards">
           <div class="accordion-item" *ngFor="let lang of languages">
@@ -76,7 +81,11 @@
               data-bs-parent="#accordionHards"
             >
               <div class="accordion-body">
-                <app-child-lang [lang]="lang" (deleteEvent)="deleteLanguage($event)" (updateEvent)="updateLanguage($event)"></app-child-lang>
+                <app-child-lang
+                  [lang]="lang"
+                  (deleteEvent)="deleteLanguage($event)"
+                  (updateEvent)="updateLanguage($event)"
+                ></app-child-lang>
               </div>
             </div>
           </div>
@@ -92,7 +101,11 @@
         >
           Cancelar
         </button>
-        <button type="submit" class="btn btn-outline-success" data-bs-dismiss="modal">
+        <button
+          type="submit"
+          class="btn btn-outline-success"
+          data-bs-dismiss="modal"
+        >
           Aceptar
         </button>
       </div>

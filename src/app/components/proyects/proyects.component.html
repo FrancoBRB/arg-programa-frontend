@@ -2,7 +2,11 @@
   <!-- EMPIEZA PROYECTOS -->
   <div class="controls">
     <h2>Proyectos</h2>
-    <i class="fa-solid fa-plus controls-icon" data-bs-toggle="modal" data-bs-target="#newProjectModal"></i>
+    <i
+      class="fa-solid fa-plus controls-icon"
+      data-bs-toggle="modal"
+      data-bs-target="#newProjectModal"
+    ></i>
   </div>
 
   <div class="row">
@@ -24,15 +28,28 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="newProjectModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="newProjectModalLabel">Agregar nuevo proyecto</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
+<form #newProjectForm="ngForm" (ngSubmit)="onSubmit(newProjectForm)">
+  <div
+    class="modal fade"
+    id="newProjectModal"
+    tabindex="-1"
+    aria-labelledby="newProjectModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="newProjectModalLabel">
+            Agregar nuevo proyecto
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label"
               >Imagen:</label
@@ -46,6 +63,10 @@
               [(ngModel)]="newImg"
             />
           </div>
+          <div class="alert alert-danger" role="alert" *ngIf="alertImg">
+            La imagen no puede estar vacía.
+          </div>
+
           <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label"
               >Nombre:</label
@@ -59,6 +80,10 @@
               [(ngModel)]="newName"
             />
           </div>
+          <div class="alert alert-danger" role="alert" *ngIf="alertName">
+            El nombre no puede estar vacío.
+          </div>
+
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label"
               >Descripción:</label
@@ -69,10 +94,14 @@
                 name="descToAdd"
                 class="form-control"
                 aria-label="With textarea"
-                style="height: 150px;"
+                style="height: 150px"
               ></textarea>
             </div>
           </div>
+          <div class="alert alert-danger" role="alert" *ngIf="alertDesc">
+            La descripción no puede estar vacía.
+          </div>
+
           <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label"
               >Link repositorio:</label
@@ -86,13 +115,22 @@
               [(ngModel)]="newRepo"
             />
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="addProject()">Aceptar</button>
+          <div class="alert alert-danger" role="alert" *ngIf="alertRepo">
+            El link no puede estar vacío.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+            #closeButton
+          >
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-outline-success">Aceptar</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
+</form>

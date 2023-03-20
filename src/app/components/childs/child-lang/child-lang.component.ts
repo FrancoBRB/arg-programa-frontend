@@ -11,6 +11,7 @@ export class ChildLangComponent implements OnInit {
   @Input() lang: Language = new Language();
   newLangName: string = '';
   newLangPorcentage: number = 0;
+  alert: boolean = false;
   @Output() deleteEvent = new EventEmitter<number>();
   @Output() updateEvent = new EventEmitter<Language>();
 
@@ -18,7 +19,13 @@ export class ChildLangComponent implements OnInit {
 
   ngOnInit() {}
 
-  editLang() {
+  onSubmit(form: any) {
+    console.log(form.value);
+    if(!form.value.newLangName){
+      this.alert = true;
+      return;
+    }
+    this.alert = false;
     if(this.newLangName){
       this.lang.langName = this.newLangName;
     }
@@ -28,6 +35,8 @@ export class ChildLangComponent implements OnInit {
     this.languageService
       .editLanguage(this.lang)
       .subscribe((e) => this.updateEvent.emit(e));
+      this.newLangPorcentage = 0;
+      this.newLangName = "";
   }
 
   deleteLang() {

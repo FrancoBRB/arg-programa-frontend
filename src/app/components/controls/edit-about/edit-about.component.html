@@ -5,9 +5,11 @@
 ></i>
 
 <!-- Modal -->
-<div
+<form #aboutForm="ngForm" (ngSubmit)="onSubmit(aboutForm)">
+  <div
   class="modal fade"
   id="aboutModal"
+  #aboutModal
   tabindex="-1"
   aria-labelledby="aboutModalLabel"
   aria-hidden="true"
@@ -24,29 +26,36 @@
         ></button>
       </div>
       <div class="modal-body">
-        <div class="form-floating">
-          <textarea
-            class="form-control"
-            id="floatingTextarea2"
-            style="height: 50vh"
-            [(ngModel)]="about"
-            spellcheck="false"
-          ></textarea>
-          <label for="floatingTextarea2">Nuevo sobre mí</label>
-        </div>
+          <div class="form-floating">
+            <textarea
+              class="form-control"
+              id="floatingTextarea2"
+              style="height: 50vh"
+              name="newAbout"
+              [(ngModel)]="about"
+              spellcheck="false"
+              required
+            ></textarea>
+            <label for="floatingTextarea2">Nuevo sobre mí</label>
+            <div *ngIf="alert" class="alert alert-danger mt-2" role="alert">
+              El texto sobre mí no puede estar vacío.
+            </div>                      
+          </div>
       </div>
       <div class="modal-footer">
         <button
           type="button"
           class="btn btn-outline-danger"
           data-bs-dismiss="modal"
+          #closeButton
         >
           Cancelar
         </button>
-        <button data-bs-dismiss="modal" (click)="editAbout()" class="btn btn-outline-success">
+        <button type="submit" class="btn btn-outline-success">
           Aceptar
         </button>
       </div>
     </div>
   </div>
 </div>
+</form>

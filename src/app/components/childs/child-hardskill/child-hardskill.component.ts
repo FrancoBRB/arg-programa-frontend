@@ -10,6 +10,7 @@ import { HardSkillsService } from 'src/app/services/hard-skills.service';
 export class ChildHardskillComponent implements OnInit {
   @Input() skill: Hardskill = new Hardskill();
   newName: string = '';
+  alert: boolean = false;
   @Output() deleteEvent = new EventEmitter<number>();
   @Output() updateEvent = new EventEmitter<Hardskill>();
 
@@ -17,8 +18,13 @@ export class ChildHardskillComponent implements OnInit {
 
   ngOnInit() {}
 
-  editHardSkill() {
-    this.skill.skillname = this.newName;
+  onSubmit(form: any) {
+    if(!form.value.skillnameInput){
+      this.alert = true;
+      return;
+    }
+    this.alert = false;
+    this.skill.skillname = form.value.skillnameInput;
     this.hardskillService
       .editHardSkill(this.skill)
       .subscribe((e) => this.updateEvent.emit(e));

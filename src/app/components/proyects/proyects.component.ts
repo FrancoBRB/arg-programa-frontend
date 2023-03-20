@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Project } from 'src/app/models/Project';
 import { ProyectsService } from 'src/app/services/proyects.service';
 
@@ -13,6 +13,11 @@ export class ProyectsComponent implements OnInit {
   newName: string = '';
   newDesc: string = '';
   newRepo: string = '';
+  alertImg: boolean = false;
+  alertName: boolean = false;
+  alertDesc: boolean = false;
+  alertRepo: boolean = false;
+  @ViewChild('closeButton') closeButton: any;
 
   constructor(private projectService: ProyectsService) {}
 
@@ -26,15 +31,56 @@ export class ProyectsComponent implements OnInit {
     }
   }
 
-  addProject() {
-    const projectToAdd = new Project();
-    projectToAdd.name = this.newName;
-    projectToAdd.desc = this.newDesc;
-    projectToAdd.repo = this.newRepo;
-    projectToAdd.img = this.newImg;
-    this.projectService
-      .addProject(projectToAdd)
-      .subscribe((e) => this.projects.push(e));
+  validate(form: any): boolean {
+    let isValid = true;
+    if (!form.value.imgToAdd) {
+      isValid = false;
+      this.alertImg = true;
+    }
+    if (!form.value.nameToAdd) {
+      isValid = false;
+      this.alertName = true;
+    }
+
+    if (!form.value.descToAdd) {
+      isValid = false;
+      this.alertDesc = true;
+    }
+
+    if (!form.value.repoToAdd) {
+      isValid = false;
+      this.alertRepo = true;
+    }
+    return isValid;
+  }
+
+  resetAlerts() {
+    this.alertDesc = false;
+    this.alertImg = false;
+    this.alertName = false;
+    this.alertRepo = false;
+  }
+
+  resetInputs(){
+    this.newName = "";
+    this.newDesc = "";
+    this.newRepo = "";
+    this.newImg = "";
+  }
+
+  onSubmit(form: any) {
+    if (this.validate(form)) {
+      const projectToAdd = new Project();
+      projectToAdd.name = this.newName;
+      projectToAdd.desc = this.newDesc;
+      projectToAdd.repo = this.newRepo;
+      projectToAdd.img = this.newImg;
+      this.projectService
+        .addProject(projectToAdd)
+        .subscribe((e) => this.projects.push(e));
+      this.resetAlerts();
+      this.closeButton.nativeElement.click();
+    }
   }
 
   deleteProject(id: number) {

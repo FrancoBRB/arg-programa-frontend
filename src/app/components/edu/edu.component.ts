@@ -42,6 +42,7 @@ export class EduComponent implements OnInit {
     }
   }
 
+
   updateEducation(id: number | null) {
     if (id) {
       const edutoAdd = new Education();
