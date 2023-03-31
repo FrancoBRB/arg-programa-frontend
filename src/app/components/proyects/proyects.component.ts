@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Project } from 'src/app/models/Project';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProyectsService } from 'src/app/services/proyects.service';
 
 @Component({
@@ -18,8 +19,9 @@ export class ProyectsComponent implements OnInit {
   alertDesc: boolean = false;
   alertRepo: boolean = false;
   @ViewChild('closeButton') closeButton: any;
+  isLogged: boolean = false;
 
-  constructor(private projectService: ProyectsService) {}
+  constructor(private projectService: ProyectsService, private authService: AuthService) {}
 
   updateProject(project: Project) {
     const projectToUpdate = this.projects.find((p) => p.id === project.id);
@@ -79,6 +81,7 @@ export class ProyectsComponent implements OnInit {
         .addProject(projectToAdd)
         .subscribe((e) => this.projects.push(e));
       this.resetAlerts();
+      this.resetInputs();
       this.closeButton.nativeElement.click();
     }
   }
@@ -89,6 +92,7 @@ export class ProyectsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLogged = this.authService.isAuthenticated();
     this.projectService.getProjects().subscribe((project) => {
       this.projects = project;
     });

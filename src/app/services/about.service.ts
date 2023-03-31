@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Profile } from '../models/Profile';
 
 @Injectable()
@@ -10,8 +10,8 @@ export class AboutService {
 
   constructor(private http: HttpClient) {}
 
-  getProfileByEmail(email: string): Observable<Profile> {
-    return this.http.get<Profile>(`${this.urlAPI}profiles/email/${email}`);
+  getProfile(): Observable<Profile> {
+    return this.http.get<Profile>(`${this.urlAPI}profiles/1`);
   }
 
   editProfile(profile : Profile):Observable<Profile>{

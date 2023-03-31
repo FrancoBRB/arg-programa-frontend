@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card border-0 shadow bg-light rounded-3 my-5">
+        <div class="card-body p-4 p-sm-5">
+          <h5 class="card-title text-center mb-5 fw-light fs-5">
+            Iniciar Sesión
+          </h5>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="form-floating mb-3">
+              <input
+                type="email"
+                formControlName="email"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+              />
+              <label for="floatingInput">Email</label>
+              <div
+                class="invalid-feedback d-block"
+                *ngIf="
+                  !loginForm.controls.email?.valid &&
+                  (loginForm.controls.email?.dirty ||
+                    loginForm.controls.email?.touched)
+                "
+              >
+                * Email no valido
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="password"
+                formControlName="password"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="Contraseña"
+              />
+              <label for="floatingPassword">Contraseña</label>
+              <div
+              class="invalid-feedback d-block"
+              *ngIf="
+                !loginForm.controls.password?.valid &&
+                (loginForm.controls.password?.dirty ||
+                  loginForm.controls.password?.touched)
+              "
+            >
+              * Ingrese su contraseña
+            </div>
+            </div>
+            <span class="information"
+              >*Ya que este portfolio es un proyecto a evaluar, el login solo es
+              utilizado a fines demostrativos.</span
+            >
+            <div class="d-grid mt-3">
+              <button
+                [disabled]="!loginForm.valid"
+                class="btn btn-info btn-login"
+                type="submit"
+              >
+                Entrar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

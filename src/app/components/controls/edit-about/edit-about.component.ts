@@ -20,7 +20,7 @@ export class EditAboutComponent implements OnInit {
   constructor(private aboutService: AboutService, private router: Router) { }
 
   ngOnInit() {
-    this.aboutService.getProfileByEmail("francojb5@hotmail.com").subscribe((p)=>{
+    this.aboutService.getProfile().subscribe((p)=>{
       this.profile = p;
       this.about = p.about;
     })

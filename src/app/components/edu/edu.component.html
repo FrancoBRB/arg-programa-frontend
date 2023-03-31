@@ -4,10 +4,11 @@
       <h2>Educación</h2>
       <div class="icons">
         <app-child-edu
+          *ngIf="isLogged"
           class="controls-icon"
           (newEduEvent)="addEducation($event)"
         ></app-child-edu>
-        <i class="fa-solid fa-pencil controls-icon" (click)="changeMode()"></i>
+        <i *ngIf="isLogged" class="fa-solid fa-pencil controls-icon" (click)="changeMode()"></i>
       </div>
     </div>
     <div class="table-responsive">

@@ -1,7 +1,7 @@
 <section id="about">
   <div class="controls">
     <h2>Sobre mí</h2>
-    <app-edit-about class="controls-icon" (editProfileEvent)="editProfile($event)"></app-edit-about>
+    <app-edit-about *ngIf="isLogged" class="controls-icon" (editProfileEvent)="editProfile($event)"></app-edit-about>
   </div>
   <div [innerHTML]="about" class="text-muted about-text"></div>
   

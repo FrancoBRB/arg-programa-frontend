@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hardskill } from 'src/app/models/Hardskill';
+import { AuthService } from 'src/app/services/auth.service';
 import { HardSkillsService } from 'src/app/services/hard-skills.service';
 
 @Component({
@@ -9,8 +10,9 @@ import { HardSkillsService } from 'src/app/services/hard-skills.service';
 })
 export class HardComponent implements OnInit {
   hardskills: Hardskill[] = []
+  isLogged: boolean = false;
 
-  constructor(private hardService: HardSkillsService) {}
+  constructor(private hardService: HardSkillsService, private authService: AuthService) {}
 
   addHardSkill(hard: Hardskill){
     this.hardskills.push(hard);
@@ -28,6 +30,7 @@ export class HardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLogged = this.authService.isAuthenticated();
     this.hardService.getHardSkills().subscribe((skills) => {
       this.hardskills = skills;
     });

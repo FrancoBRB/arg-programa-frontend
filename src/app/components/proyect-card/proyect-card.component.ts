@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Project } from 'src/app/models/Project';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProyectsService } from 'src/app/services/proyects.service';
 
 @Component({
@@ -28,11 +29,12 @@ export class ProyectCardComponent implements OnInit {
   alertDesc: boolean = false;
   alertName: boolean = false;
   alertRepo: boolean = false;
+  isLogged: boolean = false;
   @Output() updateProjectEvent = new EventEmitter<Project>();
   @Output() deleteProjectEvent = new EventEmitter<number>();
   @ViewChild('closeButton') closeButton: any;
 
-  constructor(private projectService: ProyectsService) {}
+  constructor(private projectService: ProyectsService, private authService: AuthService) {}
 
   validate(form: any): boolean {
     let isValid = true;
@@ -90,5 +92,6 @@ export class ProyectCardComponent implements OnInit {
     this.newImg = this.img;
     this.newRepo = this.repo;
     this.newName = this.name;
+    this.isLogged = this.authService.isAuthenticated();
   }
 }

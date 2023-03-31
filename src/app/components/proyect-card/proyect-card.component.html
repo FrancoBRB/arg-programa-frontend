@@ -9,11 +9,12 @@
       <a href="{{ repo }}" class="btn btn-outline-info">Repositorio</a>
 
       <i
+        *ngIf="isLogged"
         class="fa-solid fa-pencil"
         data-bs-toggle="modal"
         attr.data-bs-target="#cardModal-{{ id }}"
       ></i>
-      <i class="fa-solid fa-xmark" (click)="deleteProject()"></i>
+      <i *ngIf="isLogged" class="fa-solid fa-xmark" (click)="deleteProject()"></i>
     </div>
   </div>
 </div>

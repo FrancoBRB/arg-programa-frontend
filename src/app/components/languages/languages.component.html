@@ -1,6 +1,7 @@
 <div class="controls">
   <h2>Idiomas</h2>
   <app-edit-lang
+    *ngIf="isLogged"
     class="controls-icon"
     (newLangEvent)="addLanguage($event)"
     (deleteLangEvent)="deleteLanguage($event)"

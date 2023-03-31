@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 
@@ -26,6 +26,7 @@ import { ChildSoftskillComponent } from './components/childs/child-softskill/chi
 import { EditLangComponent } from './components/controls/edit-lang/edit-lang.component';
 import { ChildLangComponent } from './components/childs/child-lang/child-lang.component';
 import { ChildEduComponent } from './components/childs/child-edu/child-edu.component';
+import { LoginComponent } from './components/login/login.component';
 
 // ./SERVICES
 import { AboutService } from './services/about.service';
@@ -34,6 +35,9 @@ import { HardSkillsService } from './services/hard-skills.service';
 import { LanguagesService } from './services/languages.service';
 import { ProyectsService } from './services/proyects.service';
 import { SoftSkillsService } from './services/soft-skills.service';
+import { HomeComponent } from './components/home/home.component';
+import { AuthService } from './services/auth.service';
+import { ApiInterceptorService } from './services/api-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -56,13 +60,19 @@ import { SoftSkillsService } from './services/soft-skills.service';
     EditLangComponent,
     ChildLangComponent,
     ChildEduComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
-    RouterModule.forRoot([{ path: '', component: AppComponent }]),
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      { path: 'login', component: LoginComponent}
+    ]),
   ],
   providers: [
     HardSkillsService,
@@ -71,6 +81,8 @@ import { SoftSkillsService } from './services/soft-skills.service';
     SoftSkillsService,
     LanguagesService,
     ProyectsService,
+    AuthService,
+    {provide: HTTP_INTERCEPTORS, useClass:ApiInterceptorService, multi:true}
   ],
   bootstrap: [AppComponent],
 })

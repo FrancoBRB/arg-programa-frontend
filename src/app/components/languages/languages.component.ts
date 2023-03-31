@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Language } from 'src/app/models/Language';
+import { AuthService } from 'src/app/services/auth.service';
 import { LanguagesService } from 'src/app/services/languages.service';
 
 @Component({
@@ -10,8 +11,9 @@ import { LanguagesService } from 'src/app/services/languages.service';
 export class LanguagesComponent implements OnInit {
 
   languages: Language[] = [];
+  isLogged: boolean = false;
 
-  constructor(private langsService: LanguagesService) { }
+  constructor(private langsService: LanguagesService, private authService: AuthService) { }
   
   addLanguage(lang: Language){
     this.languages.push(lang);
@@ -30,6 +32,7 @@ export class LanguagesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLogged = this.authService.isAuthenticated();
     this.langsService.getLanguages().subscribe((langs) => {
       this.languages = langs;
     })

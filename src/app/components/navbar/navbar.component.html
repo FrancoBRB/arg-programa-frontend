@@ -6,10 +6,10 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" href="https://www.argentina.gob.ar/economia/conocimiento/argentina-programa" target="_blank">🇦🇷 Argentina Programa</a>
+          <a class="nav-link active" href="">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="https://www.argentina.gob.ar/produccion/argentina-programa/segunda-etapa" target="_blank">#YoProgramo</a>
+          <a class="nav-link active" href="https://www.argentina.gob.ar/economia/conocimiento/argentina-programa" target="_blank">🇦🇷 Argentina Programa</a>
         </li>
       </ul>
       <ul class="navbar-nav d-flex">
@@ -19,7 +19,10 @@
         <li class="nav-item">
           <a class="nav-link active" href="https://github.com/FrancoBRB" target="_blank">Github</a>
         </li>
-        <button class="btn btn-info">Login</button>
+        <li>
+          <a href="/login" *ngIf="!isLogged"><button class="btn btn-info">Login</button></a>
+          <button *ngIf="isLogged" (click)="logout()" class="btn btn-outline-info">Logout</button>
+        </li>
       </ul>
     </div>
   </div>

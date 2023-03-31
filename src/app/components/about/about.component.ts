@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Profile } from 'src/app/models/Profile';
 import { AboutService } from 'src/app/services/about.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-about',
@@ -10,8 +11,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class AboutComponent implements OnInit {
   about: string = '';
+  isLogged: boolean = false;
 
-  constructor(private aboutService: AboutService) {}
+  constructor(private aboutService: AboutService, private authService: AuthService) {}
 
   editProfile(profile: Profile) {
     this.about = this.highlightText(profile.about);
@@ -35,9 +37,10 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
     this.aboutService
-      .getProfileByEmail('francojb5@hotmail.com')
+      .getProfile()
       .subscribe((profile) => {
         this.about = this.highlightText(profile.about);
       });
+    this.isLogged = this.authService.isAuthenticated();
   }
 }

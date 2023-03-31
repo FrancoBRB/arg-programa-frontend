@@ -1,6 +1,7 @@
 <div class="controls">
   <h2>Hard Skills</h2>
   <app-edit-hard
+    *ngIf="isLogged"
     class="controls-icon"
     (newHardSkillEvent)="addHardSkill($event)"
     (deleteHardSkillEvent)="deleteHardSkill($event)"

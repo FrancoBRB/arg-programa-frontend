@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Softskill } from 'src/app/models/Softskill';
+import { AuthService } from 'src/app/services/auth.service';
 import { SoftSkillsService } from 'src/app/services/soft-skills.service';
 
 @Component({
@@ -10,8 +11,9 @@ import { SoftSkillsService } from 'src/app/services/soft-skills.service';
 export class SoftComponent implements OnInit {
 
   softskills: Softskill[] = [];
+  isLogged: boolean = false;
 
-  constructor(private softService: SoftSkillsService) { }
+  constructor(private softService: SoftSkillsService, private authService: AuthService) { }
 
   addSoftSkill(soft: Softskill){
     this.softskills.push(soft);
@@ -30,6 +32,7 @@ export class SoftComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLogged = this.authService.isAuthenticated();
     this.softService.getSoftSkills().subscribe((softskill)=>{
       this.softskills = softskill;
     })

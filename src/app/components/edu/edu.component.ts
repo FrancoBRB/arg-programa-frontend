@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Education } from 'src/app/models/Education';
+import { AuthService } from 'src/app/services/auth.service';
 import { EducationService } from 'src/app/services/education.service';
 
 @Component({
@@ -10,8 +11,9 @@ import { EducationService } from 'src/app/services/education.service';
 export class EduComponent implements OnInit {
   educations: Education[] = [];
   switch: boolean = false;
+  isLogged: boolean = false;
 
-  constructor(private eduService: EducationService) {}
+  constructor(private eduService: EducationService, private authService: AuthService) {}
 
   changeMode() {
     if (this.switch) {
@@ -72,6 +74,7 @@ export class EduComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLogged = this.authService.isAuthenticated();
     this.eduService.getEducation().subscribe((education) => {
       this.educations = education;
     });

@@ -2,6 +2,7 @@
   <div class="controls">
     <h2>Soft Skills</h2>
     <app-edit-soft
+      *ngIf="isLogged"
       class="controls-icon"
       (addSoftSkillEvent)="addSoftSkill($event)"
       (deleteSoftSkillEvent)="deleteSoftSkill($event)"
